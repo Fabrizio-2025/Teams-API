@@ -11,5 +11,6 @@ public interface MemberService {
 
     Member saveMember(Member member);
 
+    Member updateMember(Integer memberId, Member member);
 
 }

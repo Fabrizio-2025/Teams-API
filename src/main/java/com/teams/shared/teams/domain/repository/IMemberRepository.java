@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface IMemberRepository extends JpaRepository<Member,Integer> {
     List<Member> findAllBy();
 
+    Optional<Member> findByMemberName(String name);
     Optional<Member> findByMemberId(Integer memberId);
 
 

@@ -18,13 +18,12 @@ public class MemberServiceImpl implements MemberService {
 
     private final IMemberRepository imemberRepository;
 
-    private final String ENTITY;
+    private static final String ENTITY="Members" ;
 
     private final Validator validator;
 
     public MemberServiceImpl(IMemberRepository imemberRepository, Validator validator){
         this.imemberRepository = imemberRepository;
-        ENTITY = "Members";
         this.validator = validator;
     }
 
@@ -47,6 +46,29 @@ public class MemberServiceImpl implements MemberService {
         if(!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
         return imemberRepository.save(member);
+    }
+
+    @Override
+    public Member updateMember(Integer memberId, Member member) {
+        Set<ConstraintViolation<Member>> violations = validator.validate(member);
+
+        if (!violations.isEmpty())
+            throw new ResourceValidationException(ENTITY, violations);
+
+        // Name Uniqueness validation
+        Member studentWithName = IMemberRepository.findByMemberName(member.getMemberName()).orElseThrow(()->{return null;});
+
+//        if(studentWithName != null && !studentWithName.getId().equals(studentId))
+//            throw new ResourceValidationException(ENTITY,
+//                    "An student with the same name already exists.");
+//
+//        return studentRepository.findById(studentId).map(student ->
+//                        studentRepository.save(
+//                                student.withName(request.getName())
+//                                        .withAge(request.getAge())
+//                                        .withAddress(request.getAddress())))
+//                .orElseThrow(() -> new ResourceNotFoundException(ENTITY, studentId));
+        return new Member();
     }
 
 }

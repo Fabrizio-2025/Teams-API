@@ -6,6 +6,8 @@ import com.teams.shared.teams.resource.create.CreateMemberResource;
 import com.teams.shared.teams.resource.create.CreateTeamResource;
 import com.teams.shared.teams.resource.show.MemberResource;
 import com.teams.shared.teams.domain.model.entity.Member;
+import com.teams.shared.teams.resource.update.UpdateMemberResource;
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -32,6 +34,10 @@ public class MemberMapper implements Serializable {
 
     public Member toModel(CreateMemberResource createMemberResource) {
         return mapper.map(createMemberResource, Member.class);
+    }
+
+    public Member toModel(UpdateMemberResource resource) {
+        return mapper.map(resource, Member.class);
     }
 
 }

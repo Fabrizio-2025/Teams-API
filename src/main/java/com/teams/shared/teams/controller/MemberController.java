@@ -8,6 +8,7 @@ import com.teams.shared.teams.resource.show.MemberResource;
 import com.teams.shared.teams.domain.service.MemberService;
 import com.teams.shared.teams.mapping.mappers.MemberMapper;
 import com.teams.shared.teams.resource.show.TeamResource;
+import com.teams.shared.teams.resource.update.UpdateMemberResource;
 import org.modelmapper.internal.bytebuddy.asm.MemberRemoval;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +36,12 @@ public class MemberController {
         Member newMember = memberMapper.toModel(createMemberResource);
         return memberMapper.toResource(memberService.saveMember(newMember));
 
+    }
+
+    @PutMapping("{memberId}")
+    public MemberResource updateMember(@PathVariable Integer memberId,
+                                         @RequestBody UpdateMemberResource resource) {
+        return memberMapper.toResource(memberService.updateMember(memberId, memberMapper.toModel(resource)));
     }
 
 }
