@@ -9,6 +9,7 @@ public interface MemberService {
 
     Member getByMemberId(Integer memberId);
 
+    Member saveMember(Member member);
 
 
 }

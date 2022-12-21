@@ -9,8 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping(value="/Teams",produces = "application/json")
+@RestController//link-local
+@RequestMapping(value="/teams",produces = "application/json")
 public class TeamController {
     private final TeamService teamService;
 
